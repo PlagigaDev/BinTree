@@ -1,4 +1,3 @@
-//made by Ben Altmann
 
 public class BinTree {
   private int content;
