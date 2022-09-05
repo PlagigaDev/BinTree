@@ -68,26 +68,4 @@ public class BinTree {
   public boolean search(int value) { // checks if a given value is a part of the tree
    return (this.findNode(value) != null);
   }
-
-  /*public void delete(int value) // deletes a given value from the tree
-  {
-    BinTree treeToDelete = this.findNode(value);
-    if (treeToDelete != null) {
-    BinTree treeParent = treeToDelete.parent;
-    if (treeToDelete.right == null && treeToDelete.left == null){
-      if (treeToDelete.get() < treeParent.get()){
-        treeParent.left = null;
-      }
-      else{
-        treeParent.right = null;
-      }
-    }
-    }
-  }
-  
-  public void rightRotate(){ // does a right rotation
-    
-  }
-  */
-
 }
