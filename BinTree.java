@@ -1,4 +1,3 @@
-
 public class BinTree {
   private int content;
   public BinTree left;
