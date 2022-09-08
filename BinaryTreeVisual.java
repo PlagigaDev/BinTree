@@ -3,14 +3,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-/**
- *
- * Beschreibung
- *
- * @version 1.0 vom 05.09.2022
- * @author Ben Altmann
- */
-
 public class BinaryTreeVisual extends JFrame {
   // Anfang Attribute
   private JNumberField InputNumberField = new JNumberField();
