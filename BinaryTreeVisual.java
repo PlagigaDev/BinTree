@@ -23,13 +23,18 @@ public class BinaryTreeVisual extends JFrame {
   private JTextArea OutputArea = new JTextArea("");
   private JScrollPane OutputAreaScrollPane = new JScrollPane(OutputArea);
   private BinTree NumberTree = new BinTree();
+  private JButton bGetall1 = new JButton();
+  private JButton bCheck1 = new JButton();
+  private JTextField AddressTxtField = new JTextField();
+  private JLabel lCheckforaddress = new JLabel();
+  private JLabel lLgoleftrgoright = new JLabel();
   // Ende Attribute
   
   public BinaryTreeVisual() { 
     // Frame-Initialisierung
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    int frameWidth = 465; 
+    int frameWidth = 581; 
     int frameHeight = 485;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -41,6 +46,33 @@ public class BinaryTreeVisual extends JFrame {
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
+    lLgoleftrgoright.setBounds(424, 40, 108, 24);
+    lLgoleftrgoright.setText("l: go left, r: go right");
+    cp.add(lLgoleftrgoright);
+    lCheckforaddress.setBounds(320, 16, 109, 24);
+    lCheckforaddress.setText("Check for address");
+    lCheckforaddress.setHorizontalAlignment(SwingConstants.CENTER);
+    cp.add(lCheckforaddress);
+    AddressTxtField.setBounds(336, 40, 80, 24);
+    cp.add(AddressTxtField);
+    bCheck1.setBounds(336, 72, 80, 24);
+    bCheck1.setText("Check");
+    bCheck1.setMargin(new Insets(2, 2, 2, 2));
+    bCheck1.addActionListener(new ActionListener() { 
+      public void actionPerformed(ActionEvent evt) { 
+        bCheck1_ActionPerformed(evt);
+      }
+    });
+    cp.add(bCheck1);
+    bGetall1.setBounds(216, 104, 72, 24);
+    bGetall1.setText("Get all");
+    bGetall1.setMargin(new Insets(2, 2, 2, 2));
+    bGetall1.addActionListener(new ActionListener() { 
+      public void actionPerformed(ActionEvent evt) { 
+        bGetall1_ActionPerformed(evt);
+      }
+    });
+    cp.add(bGetall1);
     
     InputNumberField.setBounds(63, 48, 75, 20);
     InputNumberField.setText("");
@@ -92,20 +124,30 @@ public class BinaryTreeVisual extends JFrame {
   } // end of main
   
   public void bSave_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
     if (InputNumberField.isNumeric()){
       NumberTree.add(InputNumberField.getInt());
     }
   } // end of bSave_ActionPerformed
 
   public void bCheck_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
     if (checkNumberField.isNumeric()){
           count++;
           int number = checkNumberField.getInt();
           OutputArea.append(String.format("---------------\n%s: \nstatus: %s \nnumber tried: %s \n---------------\n",count,NumberTree.search(number),number));
       }
   } // end of bCheck_ActionPerformed
+
+  public void bGetall1_ActionPerformed(ActionEvent evt) {
+    int[] arr = NumberTree.getAll();
+    for (int i = 0; i < arr.length; i++) {
+      OutputArea.append((i+1)+": "+arr[i]+"\n");
+    }
+  }
+
+  public void bCheck1_ActionPerformed(ActionEvent evt) {
+    // TODO hier Quelltext einfÃ¼gen
+    OutputArea.append(NumberTree.getByAdress(AddressTxtField.getText()+"")+ "\n");
+  }
 
   // Ende Methoden
 } // end of class BinaryTreeVisual

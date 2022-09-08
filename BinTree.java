@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 //made by Ben Altmann
 
 public class BinTree {
@@ -12,6 +9,17 @@ public class BinTree {
     this.content = 0;
     this.left = null;
     this.right = null;
+  }
+
+  private int[] copyArray(int[] original, int size){
+    int[] newArr = new int[size];
+    int duration = ((original.length>size) ? size : original.length);
+
+    for(int i = 0; i<duration; i++){
+      newArr[i] = original[i];
+    }
+
+    return newArr;
   }
 
   public BinTree createLeaf(int value){ //creates a new leaf on the current node
@@ -59,7 +67,7 @@ public class BinTree {
        return;
       }
       this.right.add(value);
-    } else{
+    } else if(value < this.content){
       if (this.left == null) {
         this.left = createLeaf(value);
         return;
@@ -68,14 +76,14 @@ public class BinTree {
     }
   }
   
-  public int getByAdress(String address){
+  public int getByAdress(String address){ // gives the number given at a special address
     BinTree help = this; 
     while(true){
+      if(help == null){
+        return 0;
+      }
       if (address == ""){
         return help.get();
-      }
-      else if(help == null){
-        return 0;
       }
       if(address.charAt(0) == 'l'){
         help = help.left;
@@ -90,27 +98,30 @@ public class BinTree {
     }
     }
   
-  public int[] getAll(){
-    List<Integer> inputList = new ArrayList<>();
-    inputList.add(this.content);
+  public int[] getAll(){// gets all the values in order from smallest to largest
+    int[] arr = new int[0];
     if (this.left != null){
-
+      arr = this.left.getAll(arr);
     }
-    if (this.right != null){
-
+    arr = copyArray(arr, arr.length+1);
+    arr[arr.length-1] = this.content;
+    if(this.right != null){
+      arr = this.right.getAll(arr);
     }
-    return inputList.toArray();
+    return arr;
+
   }
 
-  public List<Integer> getAll(List inputList){
-    inputList.add(this.content);
+  public int[] getAll(int[] arr){ // just takes an in an int array for the output
     if (this.left != null){
-      
+      arr = this.left.getAll(arr);
     }
-    if (this.right != null){
-
+    arr = copyArray(arr, arr.length+1);
+    arr[arr.length-1] = this.content;
+    if(this.right != null){
+      arr = this.right.getAll(arr);
     }
-    return inputList;
+    return arr;
   }
 
   public boolean search(int value) { // checks if a given value is a part of the tree
